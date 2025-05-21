@@ -15,8 +15,8 @@ const StarRating = ({ rating, onRate = () => {}, feedbackRatings = false }) => {
             (hover || rating) >= star ? "text-yellow-400" : "text-gray-300"
           }`}
           onClick={() => onRate(star)}
-          onMouseEnter={feedbackRatings ? () => setHover(star) : null}
-          onMouseLeave={feedbackRatings ? () => setHover(null) : null}
+          onMouseEnter={!feedbackRatings ? () => setHover(star) : null}
+          onMouseLeave={!feedbackRatings ? () => setHover(null) : null}
         />
       ))}
     </div>

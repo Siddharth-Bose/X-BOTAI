@@ -39,7 +39,17 @@ function Chat() {
             <Message key={msg.id} {...msg} onFeedback={handleFeedbackTrigger} />
           ))
         ) : (
-          <Suggestions onSend={addUserMessage} />
+          <div className="mt-[15%] flex flex-col grow-1">
+            <div className="flex justify-center items-center flex-col">
+              <p>HowHow Can I Help You Today?</p>
+              <img
+                src="/botai.png"
+                alt="Soul AI"
+                className="h-[100px] rounded-full shadow-xl"
+              />
+            </div>
+            <Suggestions onSend={addUserMessage} />
+          </div>
         )}
       </div>
 

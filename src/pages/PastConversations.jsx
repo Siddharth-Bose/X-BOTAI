@@ -35,7 +35,9 @@ function PastConversations() {
               </div>
               <div className="flex gap-4 items-center">
                 <p className="text-xs text-gray-600 ml-12">{msg.time}</p>
-                {msg.rating && <StarRating rating={msg.rating} />}
+                {msg.rating && (
+                  <StarRating rating={msg.rating} feedback={true} />
+                )}
               </div>
               {msg.feedback && (
                 <p className="pl-14">
