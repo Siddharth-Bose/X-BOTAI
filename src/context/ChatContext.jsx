@@ -70,9 +70,7 @@ export const ChatProvider = ({ children }) => {
       dislike: false,
     };
 
-    setTimeout(() => {
       setCurrentChat((prev) => [...prev, botMsg]);
-    }, 500);
   };
 
   const saveToPreviousChat = (feedback) => {
