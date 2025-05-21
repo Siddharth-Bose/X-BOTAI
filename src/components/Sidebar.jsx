@@ -25,8 +25,8 @@ const Sidebar = ({ collapsed, setCollapsed, handler }) => {
           alt="Soul AI"
           className="w-10 rounded-full ring shadow-xl"
         />
+        <Link to="/" onClick={handler} className="flex gap-4 items-center">
         <span className="text-[#000] font-bold">New Chat</span>
-        <Link to="/" onClick={handler}>
           <img
             src="/newChat.png"
             alt="New Chat"
