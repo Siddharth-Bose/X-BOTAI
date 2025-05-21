@@ -44,9 +44,9 @@ const Sidebar = ({ collapsed, setCollapsed, handler }) => {
             }`}
             onClick={isMobile ? () => setCollapsed(true) : () => {}}
           >
-            <span className="text-sm font-bold text-gray-700">
+            <div className="text-sm font-bold text-gray-700">
               {link.label}
-            </span>
+            </div>
           </Link>
         ))}
       </nav>
