@@ -11,7 +11,7 @@ const Sidebar = ({ collapsed, setCollapsed, handler }) => {
   }, [isMobile]);
 
   const links = [
-    { path: "/history", label: "Past Conversation" },
+    { path: "/history", label: "Past Conversations" },
     { path: "/feedbacks", label: "Feedbacks" },
   ];
   if (collapsed) return;
