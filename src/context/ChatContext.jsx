@@ -53,7 +53,7 @@ export const ChatProvider = ({ children }) => {
 
     const botResponse = match
       ? match.response
-      : "Sorry, did not understand your query!";
+      : "Sorry, Did not understand your query!";
 
     const botMsg = {
       id: crypto.randomUUID(),
@@ -70,7 +70,7 @@ export const ChatProvider = ({ children }) => {
       dislike: false,
     };
 
-      setCurrentChat((prev) => [...prev, botMsg]);
+    setCurrentChat((prev) => [...prev, botMsg]);
   };
 
   const saveToPreviousChat = (feedback) => {

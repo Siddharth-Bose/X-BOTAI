@@ -10,6 +10,7 @@ const PastConversations = () => {
 
   return (
     <div className="grid gap-4 p-4">
+      <h2 className="text-xl font-bold mb-4">Past Conversations</h2>
       {previousChat.map((conversation, idx) => (
         <div
           key={idx}
