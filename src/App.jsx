@@ -14,25 +14,23 @@ function App() {
     <div className="flex items-start">
       <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
       <main
-        className={`p-4 w-full h-screen ${
+        className={`p-4 w-full h-screen max-h-screen flex flex-col ${
           !isMobile
             ? "bg-gradient-to-b from-[rgba(215,199,244,0.2)] to-[rgba(151,133,186,0.2)]"
             : "bg-gradient-to-b from-[#F9FAFA] from-[59%] to-[#EDE4FF] to-[100%]"
         }`}
       >
-        <button
-          onClick={() => setCollapsed(!collapsed)}
-          className="focus:outline-none flex gap-3 text-2xl"
-        >
+        <button className="focus:outline-none flex gap-3 text-2xl">
           <TiThMenu
             size={32}
+            onClick={() => setCollapsed(!collapsed)}
             className="hover:cursor-pointer"
             style={{ color: "#D7C7F4" }}
           />
           <h1 className="text-[#D7C7F4] font-bold">Bot AI</h1>
         </button>
         <Routes>
-          <Route path="/past-conversations" element={<PastConversations />} />
+          <Route path="/history" element={<PastConversations />} />
           <Route path="/feedbacks" element={<Feedbacks />} />
           <Route path="/" element={<Chat />} />
         </Routes>

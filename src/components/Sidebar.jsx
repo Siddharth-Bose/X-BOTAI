@@ -11,7 +11,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
   }, [isMobile]);
 
   const links = [
-    { path: "/past-conversations", label: "Past Conversation", icon: "🔍" },
+    { path: "/history", label: "Past Conversation", icon: "🔍" },
     { path: "/feedbacks", label: "Feedbacks", icon: "⭐️" },
   ];
   if (collapsed) return;
