@@ -3,7 +3,15 @@ import { AiOutlineDislike, AiTwotoneDislike } from "react-icons/ai";
 import { AiOutlineLike } from "react-icons/ai";
 import { BiSolidDislike, BiSolidLike } from "react-icons/bi";
 
-function Message({ bot = false, message = "", time, like, dislike }) {
+function Message({
+  id,
+  bot = false,
+  message = "",
+  time,
+  like,
+  dislike,
+  onFeedback,
+}) {
   return (
     <div className="w-full bg-[#D7C7F421]  p-2 m-2 rounded-xl shadow-xl">
       <div className="flex gap-3 items-center">
@@ -19,23 +27,23 @@ function Message({ bot = false, message = "", time, like, dislike }) {
           <p>{message}</p>
         </div>
       </div>
-      <div className="w-3/4 flex gap-3 pl-[60px] my-3 items-center">
-        <p>{time}</p>
-        <span className="hover:cursor-pointer text-2xl">
-          {like ? (
-            <BiSolidLike className="hover:shadow-xl" />
-          ) : (
-            <AiOutlineLike className="hover:shadow-xl" />
-          )}
-        </span>
-        <span className="hover:cursor-pointer text-2xl">
-          {dislike ? (
-            <BiSolidDislike className="hover:shadow-xl" />
-          ) : (
-            <AiOutlineDislike className="hover:shadow-xl" />
-          )}
-        </span>
-      </div>
+      {bot && (
+        <div className="w-3/4 flex gap-3 pl-[60px] my-3 items-center">
+          <p>{time}</p>
+          <span
+            className="hover:cursor-pointer text-2xl"
+            onClick={() => onFeedback?.(id, "like")}
+          >
+            {like ? <BiSolidLike /> : <AiOutlineLike />}
+          </span>
+          <span
+            className="hover:cursor-pointer text-2xl"
+            onClick={() => onFeedback?.(id, "dislike")}
+          >
+            {dislike ? <BiSolidDislike /> : <AiOutlineDislike />}
+          </span>
+        </div>
+      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import useIsMobile from "../hooks/useIsMobile";
 
-const Sidebar = ({ collapsed, setCollapsed, handler }) => {
+const Sidebar = ({ collapsed, setCollapsed }) => {
   const location = useLocation();
   const isMobile = useIsMobile();
 
@@ -10,10 +10,7 @@ const Sidebar = ({ collapsed, setCollapsed, handler }) => {
     isMobile && setCollapsed(true);
   }, [isMobile]);
 
-  const links = [
-    { path: "/history", label: "Past Conversations" },
-    { path: "/feedbacks", label: "Feedbacks" },
-  ];
+  const links = [{ path: "/history", label: "Past Conversations" }];
   if (collapsed) return;
   return (
     <div
@@ -25,8 +22,8 @@ const Sidebar = ({ collapsed, setCollapsed, handler }) => {
           alt="Soul AI"
           className="w-10 rounded-full ring shadow-xl"
         />
-        <Link to="/" onClick={handler} className="flex gap-4 items-center">
-        <span className="text-[#000] font-bold">New Chat</span>
+        <Link to="/" className="flex gap-4 items-center">
+          <span className="text-[#000] font-bold">New Chat</span>
           <img
             src="/newChat.png"
             alt="New Chat"
@@ -44,9 +41,7 @@ const Sidebar = ({ collapsed, setCollapsed, handler }) => {
             }`}
             onClick={isMobile ? () => setCollapsed(true) : () => {}}
           >
-            <div className="text-sm font-bold text-gray-700">
-              {link.label}
-            </div>
+            <div className="text-sm font-bold text-gray-700">{link.label}</div>
           </Link>
         ))}
       </nav>

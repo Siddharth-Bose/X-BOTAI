@@ -3,28 +3,23 @@ import faqData from "../data/faqData";
 
 const ChatContext = createContext();
 
-const LOCAL_CURRENT_CHAT = "currentChat";
-const LOCAL_PREVIOUS_CHAT = "previousChat";
-
 export const ChatProvider = ({ children }) => {
-  // Initialize state from localStorage or empty array
   const [currentChat, setCurrentChat] = useState(() => {
-    const saved = localStorage.getItem(LOCAL_CURRENT_CHAT);
-    return saved ? JSON.parse(saved) : [];
-  });
-  const [previousChat, setPreviousChat] = useState(() => {
-    const saved = localStorage.getItem(LOCAL_PREVIOUS_CHAT);
+    const saved = localStorage.getItem("currentChat");
     return saved ? JSON.parse(saved) : [];
   });
 
-  // Sync currentChat to localStorage on every change
+  const [previousChat, setPreviousChat] = useState(() => {
+    const saved = localStorage.getItem("previousChat");
+    return saved ? JSON.parse(saved) : [];
+  });
+
   useEffect(() => {
-    localStorage.setItem(LOCAL_CURRENT_CHAT, JSON.stringify(currentChat));
+    localStorage.setItem("currentChat", JSON.stringify(currentChat));
   }, [currentChat]);
 
-  // Sync previousChat to localStorage on every change
   useEffect(() => {
-    localStorage.setItem(LOCAL_PREVIOUS_CHAT, JSON.stringify(previousChat));
+    localStorage.setItem("previousChat", JSON.stringify(previousChat));
   }, [previousChat]);
 
   const addUserMessage = (message) => {
@@ -59,13 +54,7 @@ export const ChatProvider = ({ children }) => {
       id: crypto.randomUUID(),
       bot: true,
       message: botResponse,
-      time: new Date()
-        .toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: true,
-        })
-        .toUpperCase(),
+      time,
       like: false,
       dislike: false,
     };
@@ -73,31 +62,32 @@ export const ChatProvider = ({ children }) => {
     setCurrentChat((prev) => [...prev, botMsg]);
   };
 
-  const saveToPreviousChat = (feedback) => {
-    const time = new Date()
-      .toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true,
-      })
-      .toUpperCase();
+  const updateFeedback = (msgId, type) => {
+    setCurrentChat((prev) =>
+      prev.map((msg) =>
+        msg.id === msgId
+          ? { ...msg, like: type === "like", dislike: type === "dislike" }
+          : msg
+      )
+    );
+  };
 
-    if (feedback?.message && feedback?.rating) {
-      const feedbackMsg = {
-        id: crypto.randomUUID(),
-        bot: false,
-        message: `Feedback: ${feedback.message}\nRating: ${feedback.rating}/5`,
-        time,
-        like: false,
-        dislike: false,
-      };
+  const attachFeedbackToMessage = (msgId, feedback) => {
+    setCurrentChat((prev) =>
+      prev.map((msg) =>
+        msg.id === msgId
+          ? {
+              ...msg,
+              feedback: feedback.message,
+              rating: Number(feedback.rating),
+            }
+          : msg
+      )
+    );
+  };
 
-      const chatWithFeedback = [...currentChat, feedbackMsg];
-      setPreviousChat((prev) => [...prev, chatWithFeedback]);
-    } else {
-      setPreviousChat((prev) => [...prev, currentChat]);
-    }
-
+  const saveToPreviousChat = () => {
+    setPreviousChat((prev) => [...prev, currentChat]);
     setCurrentChat([]);
   };
 
@@ -108,6 +98,8 @@ export const ChatProvider = ({ children }) => {
         previousChat,
         addUserMessage,
         saveToPreviousChat,
+        updateFeedback,
+        attachFeedbackToMessage,
       }}
     >
       {children}

@@ -6,7 +6,10 @@ const FeedbackModal = ({ onClose, onSubmit }) => {
   const [rating, setRating] = useState("");
 
   const handleSubmit = () => {
-    if (!feedbackMessage || !rating) return alert("Please fill all fields.");
+    if (!feedbackMessage || !rating) {
+      return alert("Please fill all fields.");
+    }
+
     onSubmit({ message: feedbackMessage, rating });
     onClose();
   };
