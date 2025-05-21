@@ -11,8 +11,8 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
   }, [isMobile]);
 
   const links = [
-    { path: "/history", label: "Past Conversation", icon: "🔍" },
-    { path: "/feedbacks", label: "Feedbacks", icon: "⭐️" },
+    { path: "/history", label: "Past Conversation" },
+    { path: "/feedbacks", label: "Feedbacks" },
   ];
   if (collapsed) return;
   return (
@@ -44,7 +44,6 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
             }`}
             onClick={isMobile ? () => setCollapsed(true) : () => {}}
           >
-            <span className="text-lg text-gray-700">{link.icon}</span>
             <span className="text-sm font-bold text-gray-700">
               {link.label}
             </span>
