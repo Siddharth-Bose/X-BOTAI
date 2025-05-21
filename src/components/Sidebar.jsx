@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import useIsMobile from "../hooks/useIsMobile";
 
-const Sidebar = ({ collapsed, setCollapsed }) => {
+const Sidebar = ({ collapsed, setCollapsed, handler }) => {
   const location = useLocation();
   const isMobile = useIsMobile();
 
@@ -26,7 +26,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
           className="w-10 rounded-full ring shadow-xl"
         />
         <span className="text-[#000] font-bold">New Chat</span>
-        <Link to="/">
+        <Link to="/" onClick={handler}>
           <img
             src="/newChat.png"
             alt="New Chat"

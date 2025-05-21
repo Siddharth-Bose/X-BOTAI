@@ -18,7 +18,7 @@ function Chatform({ onSend, onSave }) {
         type="text"
         name="message"
         id="message"
-        placeholder="Message Bot AI…"
+        placeholder="Message Bot AI..."
         className="bg-[#fff] rounded-xl min-w-3/4 p-3 shadow border border-gray-300 focus:border-gray-900 outline-none"
         value={input}
         onChange={(e) => setInput(e.target.value)}

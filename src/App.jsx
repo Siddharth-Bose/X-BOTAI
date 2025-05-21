@@ -6,13 +6,29 @@ import { Route, Routes } from "react-router-dom";
 import PastConversations from "./pages/PastConversations";
 import Feedbacks from "./pages/Feedbacks";
 import Chat from "./pages/Chat";
+import { useChat } from "./context/ChatContext";
+import FeedbackModal from "./components/FeedbackModal";
 
 function App() {
   const [collapsed, setCollapsed] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const { saveToPreviousChat, currentChat } = useChat();
   const isMobile = useIsMobile();
+  const handleFeedbackSubmit = (feedback) => {
+    saveToPreviousChat(feedback);
+    setShowModal(false);
+  };
   return (
     <div className="flex items-start">
-      <Sidebar collapsed={collapsed} setCollapsed={setCollapsed} />
+      <Sidebar
+        collapsed={collapsed}
+        setCollapsed={setCollapsed}
+        handler={() => {
+          if (currentChat.length > 0) {
+            setShowModal(true);
+          }
+        }}
+      />
       <main
         className={`p-4 w-full h-screen max-h-screen flex flex-col ${
           !isMobile
@@ -35,6 +51,12 @@ function App() {
           <Route path="/" element={<Chat />} />
         </Routes>
       </main>
+      {showModal && currentChat.length > 0 && (
+        <FeedbackModal
+          onClose={() => setShowModal(false)}
+          onSubmit={handleFeedbackSubmit}
+        />
+      )}
     </div>
   );
 }
