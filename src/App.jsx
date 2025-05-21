@@ -36,7 +36,7 @@ function App() {
             : "bg-gradient-to-b from-[#F9FAFA] from-[59%] to-[#EDE4FF] to-[100%]"
         }`}
       >
-        <button className="focus:outline-none flex gap-3 text-2xl">
+        <header className="focus:outline-none flex gap-3 text-2xl">
           <TiThMenu
             size={32}
             onClick={() => setCollapsed(!collapsed)}
@@ -44,7 +44,7 @@ function App() {
             style={{ color: "#D7C7F4" }}
           />
           <h1 className="text-[#D7C7F4] font-bold">Bot AI</h1>
-        </button>
+        </header>
         <Routes>
           <Route path="/history" element={<PastConversations />} />
           <Route path="/feedbacks" element={<Feedbacks />} />
